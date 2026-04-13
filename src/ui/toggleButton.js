@@ -56,8 +56,10 @@ const ToggleButton = {
       this._visibilityObserver.disconnect();
       this._visibilityObserver = null;
     }
-    if (this._button && this._button.parentNode) {
-      this._button.parentNode.removeChild(this._button);
+    if (this._button) {
+      if (this._button.parentNode) {
+        this._button.parentNode.removeChild(this._button);
+      }
       this._button = null;
     }
   },
@@ -67,6 +69,8 @@ const ToggleButton = {
 
     const icon = this._button.querySelector('#yt-reader-icon');
     const label = this._button.querySelector('#yt-reader-label');
+
+    if (!icon || !label) return;
 
     if (isActive) {
       icon.innerHTML = this._playIcon;
