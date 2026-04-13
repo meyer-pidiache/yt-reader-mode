@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "name": "YT Reader Mode",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Replace the YouTube video player with the AI chat panel by default.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "pidiache@duck.com"
+      "id": "yt-reader-mode@meyer-pidiache"
     }
   },
   "permissions": [
