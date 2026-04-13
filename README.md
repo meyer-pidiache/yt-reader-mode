@@ -29,4 +29,9 @@ The project intentionally avoids complex dependencies, bundlers (like Vite or We
 ## Contributing and Community
 
 We are proud to be an Open Source project! We operate under the **Trunk-Based Development** model, which ensures a vibrant and continuous code flow.
+
 Please read our contribution document [CONTRIBUTING.md](CONTRIBUTING.md) carefully before submitting your Pull Request to align with our versioning guidelines.
+
+## License
+
+This project is licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE.md). It is free to use, modify, and distribute for personal and non-commercial purposes. Commercial use is strictly prohibited without explicit permission.
