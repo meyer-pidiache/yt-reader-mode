@@ -5,21 +5,32 @@
   "description": "Replace the YouTube video player with the AI chat panel by default.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "yt-reader-mode@example.com"
+      "id": "pidiache@duck.com"
     }
   },
-  "permissions": ["storage"],
-  "host_permissions": ["https://www.youtube.com/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
-      "css": ["src/styles.css"],
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "src/styles/main.css"
+      ],
       "js": [
-        "src/settingsManager.js",
-        "src/panelManager.js",
-        "src/toggleButton.js",
-        "src/navigationWatcher.js",
-        "src/readerModeController.js",
+        "src/core/eventBus.js",
+        "src/core/youtubeFacade.js",
+        "src/core/stateManager.js",
+        "src/services/settingsManager.js",
+        "src/services/panelManager.js",
+        "src/ui/toggleButton.js",
+        "src/core/navigationWatcher.js",
+        "src/controllers/readerModeController.js",
         "src/content.js"
       ],
       "run_at": "document_idle"

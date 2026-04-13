@@ -43,7 +43,7 @@ body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouc
   border-radius: 12px !important;
   background: #0f0f0f !important;
   border: 1px solid #333 !important;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.8) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.8) !important;
 }
 
 body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] #content {

@@ -1,6 +1,1 @@
-(function () {
-  'use strict';
-  ToggleButton.inject();
-  NavigationWatcher.start();
-  ReaderModeController.activate();
-})();
+EventBus.emit('APP_INIT');
