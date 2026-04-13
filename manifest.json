@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "YT Reader Mode",
+  "version": "1.0.0",
+  "description": "Replace the YouTube video player with the AI chat panel by default.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "yt-reader-mode@example.com"
+    }
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": [
+        "src/settingsManager.js",
+        "src/styleManager.js",
+        "src/panelManager.js",
+        "src/toggleButton.js",
+        "src/navigationWatcher.js",
+        "src/readerModeController.js",
+        "src/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}
