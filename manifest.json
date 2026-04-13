@@ -13,9 +13,9 @@
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
+      "css": ["src/styles.css"],
       "js": [
         "src/settingsManager.js",
-        "src/styleManager.js",
         "src/panelManager.js",
         "src/toggleButton.js",
         "src/navigationWatcher.js",

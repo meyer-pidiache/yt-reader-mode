@@ -16,7 +16,6 @@
         }
 
         this._reinitTimeout = setTimeout(function () {
-          StyleManager.inject();
           ToggleButton.inject();
           ReaderModeController.activate();
         }, 500);

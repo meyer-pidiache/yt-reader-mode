@@ -6,6 +6,7 @@
     _panelObserver: null,
     _panelObserverCallback: null,
     _scrollTimeout: null,
+    _timestampListener: null,
 
     getPanel: function () {
       return document.querySelector('ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"]');
@@ -87,6 +88,15 @@
       this.stopPanelObserver();
       this._panelObserverCallback = onClose;
 
+      this._timestampListener = function(e) {
+        if (e.target && e.target.classList && e.target.classList.contains('ytwMarkdownDivTimestamp')) {
+          if (this._panelObserverCallback) {
+            this._panelObserverCallback();
+          }
+        }
+      }.bind(this);
+      panel.addEventListener('click', this._timestampListener);
+
       this._panelObserver = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
           if (mutation.type === 'attributes' && mutation.attributeName === 'visibility') {
@@ -104,6 +114,12 @@
     },
 
     stopPanelObserver: function () {
+      var panel = this.getPanel();
+      if (panel && this._timestampListener) {
+        panel.removeEventListener('click', this._timestampListener);
+      }
+      this._timestampListener = null;
+
       if (this._panelObserver) {
         this._panelObserver.disconnect();
         this._panelObserver = null;

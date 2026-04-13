@@ -1,0 +1,64 @@
+/* Toggle Button Styles */
+#yt-reader-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#yt-reader-toggle svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* Reader Mode Styles */
+body.yt-reader-mode #player {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body.yt-reader-mode #secondary,
+body.yt-reader-mode #secondary-inner,
+body.yt-reader-mode #panels,
+body.yt-reader-mode #panels-inner {
+  contain: none !important;
+  transform: none !important;
+  position: static !important;
+}
+
+body.yt-reader-mode ytd-watch-flexy {
+  contain: none !important;
+  transform: none !important;
+  position: static !important;
+}
+
+body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] {
+  position: absolute !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  border-radius: 12px !important;
+  background: #0f0f0f !important;
+  border: 1px solid #333 !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.8) !important;
+}
+
+body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] #content {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;
+}
+
+body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] #header,
+body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] #footer {
+  flex: 0 0 auto !important;
+  display: block !important;
+}
+
+body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] #visibility-button,
+body.yt-reader-mode ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"] button[aria-label="Close"] {
+  display: none !important;
+}

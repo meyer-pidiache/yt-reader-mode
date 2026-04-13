@@ -3,10 +3,9 @@
 
   var ReaderModeController = {
     isActive: false,
-    _pollInterval: null,
-    _pollAttempts: 0,
-    _maxAttempts: 25,
-    _pollIntervalMs: 200,
+    _activationObserver: null,
+    _activationTimeout: null,
+    _maxWaitMs: 10000,
 
     activate: function () {
       var self = this;
@@ -24,27 +23,36 @@
 
     _activateInternal: function () {
       var self = this;
-      this._pollAttempts = 0;
 
       if (!PanelManager.triggerAskButton()) {
         return;
       }
 
-      var poll = function () {
-        if (self.isActive) return;
+      if (PanelManager.isPanelLoaded()) {
+        this._completeActivation();
+        return;
+      }
 
-        self._pollAttempts++;
+      this._clearWaiters();
 
-        if (PanelManager.isPanelLoaded()) {
-          self._completeActivation();
-        } else if (self._pollAttempts >= self._maxAttempts) {
-          self._pollAttempts = 0;
-        } else {
-          self._pollInterval = setTimeout(poll, self._pollIntervalMs);
+      var targetNode = document.querySelector('ytd-app') || document.body;
+
+      this._activationObserver = new MutationObserver(function (mutations, obs) {
+        if (self.isActive) {
+          self._clearWaiters();
+          return;
         }
-      };
+        if (PanelManager.isPanelLoaded()) {
+          self._clearWaiters();
+          self._completeActivation();
+        }
+      });
 
-      setTimeout(poll, 100);
+      this._activationObserver.observe(targetNode, { childList: true, subtree: true });
+
+      this._activationTimeout = setTimeout(function () {
+        self._clearWaiters();
+      }, this._maxWaitMs);
     },
 
     _completeActivation: function () {
@@ -76,7 +84,7 @@
     deactivate: function () {
       if (!this.isActive) return;
 
-      this._clearPoll();
+      this._clearWaiters();
 
       document.body.classList.remove('yt-reader-mode');
       PanelManager.clearPosition();
@@ -96,12 +104,15 @@
       }
     },
 
-    _clearPoll: function () {
-      if (this._pollInterval) {
-        clearTimeout(this._pollInterval);
-        this._pollInterval = null;
+    _clearWaiters: function () {
+      if (this._activationObserver) {
+        this._activationObserver.disconnect();
+        this._activationObserver = null;
       }
-      this._pollAttempts = 0;
+      if (this._activationTimeout) {
+        clearTimeout(this._activationTimeout);
+        this._activationTimeout = null;
+      }
     }
   };
 
