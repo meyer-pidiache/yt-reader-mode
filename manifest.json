@@ -5,7 +5,10 @@
   "description": "Replace the YouTube video player with the AI chat panel by default.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "yt-reader-mode@meyer-pidiache"
+      "id": "yt-reader-mode@meyer-pidiache",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "permissions": [

@@ -1,11 +1,27 @@
 const ToggleButton = {
   _button: null,
   _visibilityObserver: null,
-  _bookIcon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>',
-  _playIcon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+  _icons: null,
+
+  _buildIcon(pathD) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'currentColor');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathD);
+    svg.appendChild(path);
+    return svg;
+  },
 
   inject() {
     this.remove();
+
+    if (!this._icons) {
+      this._icons = {
+        book: this._buildIcon('M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z'),
+        play: this._buildIcon('M8 5v14l11-7z'),
+      };
+    }
 
     const container = document.querySelector('#actions #menu ytd-menu-renderer #flexible-item-buttons');
     if (!container) return;
@@ -73,10 +89,10 @@ const ToggleButton = {
     if (!icon || !label) return;
 
     if (isActive) {
-      icon.innerHTML = this._playIcon;
+      icon.replaceChildren(this._icons.play);
       label.textContent = 'Video';
     } else {
-      icon.innerHTML = this._bookIcon;
+      icon.replaceChildren(this._icons.book);
       label.textContent = 'Reader';
     }
   }
