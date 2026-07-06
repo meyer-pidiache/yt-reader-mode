@@ -1,0 +1,33 @@
+name: Deploy to Firefox Add-ons
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  WEB_EXT_API_KEY: ${{ secrets.AMO_JWT_ISSUER }}
+  WEB_EXT_API_SECRET: ${{ secrets.AMO_JWT_SECRET }}
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Submit to Firefox Add-ons
+        run: npx --yes web-ext sign \
+          --source-dir . \
+          --channel listed \
+          --approval-timeout 0 \
+          --ignore-files ".github/" ".atl/" "*.md" "sonar-project.properties"
