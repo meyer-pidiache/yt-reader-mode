@@ -34,7 +34,7 @@ A modern and lightweight browser extension designed to transform your YouTube ex
 1. Clone this repository and install dependencies:
 
    ```bash
-   git clone <repo-url>
+   git clone git@github.com:meyer-pidiache/yt-reader-mode.git
    cd yt-reader-mode
    pnpm install
    ```
