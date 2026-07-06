@@ -9,14 +9,68 @@ A modern and lightweight browser extension designed to transform your YouTube ex
 - **Initial Prompts:** Want a summary as soon as you open the video? Set up automatic text submissions for the AI to start your conversation immediately.
 - **Smart Timestamps:** Delegated integration where clicking on timestamps suggested by the model (e.g., `0:40`) automatically transitions the extension to video mode, allowing you to watch the referenced segment.
 
+## Prerequisites
+
+- **Node.js >= 20** and **pnpm** (or npm)
+
 ## Development Installation
 
-Since this extension is ready to run locally, you can install it manually on Chromium-based browsers (Chrome, Edge, Brave) or Firefox:
+### Chromium-based browsers (Chrome, Edge, Brave)
 
 1. Clone this repository or download the source code.
-2. Open your browser and navigate to the extensions management panel (in Chrome: `chrome://extensions/`).
-3. Enable **Developer mode**.
-4. Click on **Load unpacked** and select the root folder of this project.
+2. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+3. Open your browser and navigate to the extensions management panel (in Chrome: `chrome://extensions/`).
+4. Enable **Developer mode**.
+5. Click on **Load unpacked** and select the root folder of this project.
+
+### Firefox (using web-ext)
+
+[web-ext](https://extensionworkshop.com/documentation/web-ext/) is Mozilla's official CLI for WebExtension development. It provides linting, auto-reload, building, and signing.
+
+1. Clone this repository and install dependencies:
+
+   ```bash
+   git clone <repo-url>
+   cd yt-reader-mode
+   pnpm install
+   ```
+
+2. **Lint** the extension against AMO rules:
+
+   ```bash
+   pnpm run lint
+   ```
+
+3. **Run** the extension in Firefox with auto-reload:
+
+   ```bash
+   pnpm run start
+   ```
+
+   This launches Firefox with the extension temporarily installed. Changes to the source files trigger an automatic reload.
+
+4. **Build** a production `.zip` for manual submission:
+
+   ```bash
+   pnpm run build
+   ```
+
+   The built artifact is written to `web-ext-artifacts/`.
+
+5. **Sign** the extension for AMO distribution (requires API credentials):
+
+   ```bash
+   # Set your AMO API credentials first:
+   export WEB_EXT_API_KEY=...
+   export WEB_EXT_API_SECRET=...
+   pnpm run sign
+   ```
+
+   See [Signing & Publishing](https://extensionworkshop.com/documentation/publish/signing-and-distribution/) for details on obtaining API credentials.
 
 ## Internal Architecture
 
