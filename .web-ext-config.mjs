@@ -17,7 +17,7 @@ export default {
     '.web-ext-config.mjs',
     'vitest.config.js',
     'src/test-setup.js',
-    'src/core/__tests__/**',
+    'src/**/__tests__/**',
     'coverage/**',
     'node_modules/**',
     'CONTRIBUTING.md',
