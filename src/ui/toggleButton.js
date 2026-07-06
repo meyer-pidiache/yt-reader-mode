@@ -70,6 +70,7 @@ const ToggleButton = {
     if (fromTemplate) {
       btn.removeAttribute('disabled');
       btn.removeAttribute('aria-pressed');
+      btn.removeAttribute('aria-label');
 
       const iconSlot = btn.querySelector('[class*="icon" i], [class*="Icon" i]');
       if (iconSlot) {
