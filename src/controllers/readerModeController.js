@@ -1,7 +1,6 @@
 const ReaderModeController = {
   _activationObserver: null,
   _activationTimeout: null,
-  _maxWaitMs: 10000,
 
   _clearWaiters() {
     if (this._activationObserver) {
@@ -39,29 +38,20 @@ const ReaderModeController = {
     const targetNode = YouTubeFacade.getAppContainer();
 
     this._activationObserver = new MutationObserver(() => {
-      if (StateManager.isActive) {
-        this._clearWaiters();
-        return;
-      }
-      if (PanelManager.isPanelLoaded()) {
-        this._clearWaiters();
-        this._completeActivation();
-      }
+      this._tryComplete();
     });
     this._activationObserver.observe(targetNode, { childList: true, subtree: true });
 
     let retries = 0;
     const maxRetries = 3;
     const poll = () => {
-      if (StateManager.isActive) return;
-      if (PanelManager.isPanelLoaded()) {
-        this._clearWaiters();
-        this._completeActivation();
-        return;
-      }
+      if (this._tryComplete()) return;
       if (retries < maxRetries) {
         retries++;
-        PanelManager.triggerAskButton();
+        if (!PanelManager.triggerAskButton()) {
+          this._clearWaiters();
+          return;
+        }
         this._activationTimeout = setTimeout(poll, 2000);
         return;
       }
@@ -69,6 +59,19 @@ const ReaderModeController = {
     };
 
     this._activationTimeout = setTimeout(poll, 2000);
+  },
+
+  _tryComplete() {
+    if (StateManager.isActive) {
+      this._clearWaiters();
+      return true;
+    }
+    if (PanelManager.isPanelLoaded()) {
+      this._clearWaiters();
+      this._completeActivation();
+      return true;
+    }
+    return false;
   },
 
   _completeActivation() {
