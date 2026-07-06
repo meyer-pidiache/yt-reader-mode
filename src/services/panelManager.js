@@ -126,7 +126,7 @@ const PanelManager = {
     const textarea = YouTubeFacade.getChatTextarea();
     const button = YouTubeFacade.getChatSendButton();
     if (textarea && button) {
-      textarea.innerText = text;
+      textarea.value = text;
       textarea.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
       textarea.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
       textarea.dispatchEvent(new Event('keyup', { bubbles: true, composed: true }));

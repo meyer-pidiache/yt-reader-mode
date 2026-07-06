@@ -20,7 +20,7 @@ const YouTubeFacade = {
   },
 
   getChatSendButton() {
-    return document.querySelector('yt-chat-input-view-model button[aria-label="Send"]');
+    return document.querySelector('yt-chat-input-view-model form button');
   },
 
   isTimestamp(element) {
