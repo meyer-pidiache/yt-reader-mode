@@ -26,12 +26,57 @@ const ToggleButton = {
     const container = document.querySelector('#actions #menu ytd-menu-renderer #flexible-item-buttons');
     if (!container) return;
 
-    this._button = document.createElement('yt-button-view-model');
-    this._button.className = 'ytd-menu-renderer';
-    this._button.style.display = 'none';
-    this._button.innerHTML = '<button-view-model class="ytSpecButtonViewModelHost"><button class="yt-spec-button-shape-next yt-spec-button-shape-next--tonal yt-spec-button-shape-next--mono yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading yt-spec-button-shape-next--enable-backdrop-filter-experiment" id="yt-reader-toggle"><div aria-hidden="true" class="yt-spec-button-shape-next__icon"><span class="ytIconWrapperHost" style="width: 24px; height: 24px;"><span class="yt-icon-shape ytSpecIconShapeHost" id="yt-reader-icon"></span></span></div><div class="yt-spec-button-shape-next__button-text-content" id="yt-reader-label"></div></button></button-view-model>';
+    const template = container.querySelector('yt-button-view-model, button-view-model');
+    if (template) {
+      this._button = template.cloneNode(true);
+      this._button.style.display = 'none';
+      this._button.className = 'ytd-menu-renderer';
 
-    const btn = this._button.querySelector('#yt-reader-toggle');
+      const existingIds = this._button.querySelectorAll('[id]');
+      for (const el of existingIds) el.removeAttribute('id');
+    } else {
+      this._button = document.createElement('yt-button-view-model');
+      this._button.className = 'ytd-menu-renderer';
+      this._button.style.display = 'none';
+      const vm = document.createElement('button-view-model');
+      const btn = document.createElement('button');
+      btn.id = 'yt-reader-toggle';
+      btn.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:0 12px;height:36px;border:none;border-radius:18px;cursor:pointer;color:inherit;background:transparent';
+      const ico = document.createElement('div');
+      ico.innerHTML = '<span class="ytIconWrapperHost" style="width:24px;height:24px"><span class="yt-icon-shape ytSpecIconShapeHost" id="yt-reader-icon"></span></span>';
+      const lbl = document.createElement('div');
+      lbl.id = 'yt-reader-label';
+      btn.append(ico, lbl);
+      vm.append(btn);
+      this._button.append(vm);
+    }
+
+    const btn = this._button.querySelector('button');
+    if (!btn) {
+      this._button = null;
+      return;
+    }
+    btn.id = 'yt-reader-toggle';
+
+    const iconSlot = btn.querySelector('[class*="icon" i], [class*="Icon" i]');
+    if (iconSlot) {
+      iconSlot.innerHTML = '';
+      const wrapper = document.createElement('span');
+      wrapper.className = 'ytIconWrapperHost';
+      wrapper.style.cssText = 'width:24px;height:24px';
+      const shape = document.createElement('span');
+      shape.className = 'yt-icon-shape ytSpecIconShapeHost';
+      shape.id = 'yt-reader-icon';
+      wrapper.append(shape);
+      iconSlot.append(wrapper);
+    }
+
+    const labelSlot = btn.querySelector('[class*="text-content" i], [class*="TextContent" i], [class*="label" i]');
+    if (labelSlot) {
+      labelSlot.id = 'yt-reader-label';
+      labelSlot.textContent = '';
+    }
+
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
