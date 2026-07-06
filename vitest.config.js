@@ -11,6 +11,9 @@ export default defineConfig({
         if (id.endsWith('/src/core/stateManager.js')) {
           return { code: code + '\nexport { StateManager };', map: null };
         }
+        if (id.endsWith('/src/controllers/readerModeController.js')) {
+          return { code: code + '\nexport { ReaderModeController };', map: null };
+        }
         return null;
       },
     },
