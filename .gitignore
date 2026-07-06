@@ -1,5 +1,6 @@
 node_modules/
 web-ext-artifacts/
+coverage/
 # Lockfile excluded intentionally — deps are build-time only (no runtime impact),
 # no CI runs pnpm install, and avoiding lockfile churn in every PR.
 pnpm-lock.yaml
