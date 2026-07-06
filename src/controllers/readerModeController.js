@@ -38,7 +38,7 @@ const ReaderModeController = {
 
     const targetNode = YouTubeFacade.getAppContainer();
 
-    this._activationObserver = new MutationObserver((mutations, obs) => {
+    this._activationObserver = new MutationObserver(() => {
       if (StateManager.isActive) {
         this._clearWaiters();
         return;
@@ -48,12 +48,27 @@ const ReaderModeController = {
         this._completeActivation();
       }
     });
-
     this._activationObserver.observe(targetNode, { childList: true, subtree: true });
 
-    this._activationTimeout = setTimeout(() => {
+    let retries = 0;
+    const maxRetries = 3;
+    const poll = () => {
+      if (StateManager.isActive) return;
+      if (PanelManager.isPanelLoaded()) {
+        this._clearWaiters();
+        this._completeActivation();
+        return;
+      }
+      if (retries < maxRetries) {
+        retries++;
+        PanelManager.triggerAskButton();
+        this._activationTimeout = setTimeout(poll, 2000);
+        return;
+      }
       this._clearWaiters();
-    }, this._maxWaitMs);
+    };
+
+    this._activationTimeout = setTimeout(poll, 2000);
   },
 
   _completeActivation() {
