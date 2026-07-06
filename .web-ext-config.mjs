@@ -13,7 +13,7 @@ export default {
     '.github/**',
     '.gitignore',
     '.nvmrc',
-    '.npmrc',
+    'pnpm-workspace.yaml',
     '.web-ext-config.mjs',
     'vitest.config.js',
     'src/test-setup.js',
