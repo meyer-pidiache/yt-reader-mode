@@ -7,9 +7,15 @@
     "lint": "web-ext lint",
     "start": "web-ext run",
     "build": "web-ext build",
-    "sign": "web-ext sign"
+    "sign": "web-ext sign",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.10",
+    "jsdom": "^29.1.1",
+    "vitest": "^4.1.10",
     "web-ext": "^8.6.0"
   },
   "engines": {

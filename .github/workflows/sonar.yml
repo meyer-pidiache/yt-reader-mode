@@ -22,6 +22,17 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run tests with coverage
+        run: pnpm test:coverage
+
       - name: SonarQube Cloud Scan
         uses: SonarSource/sonarqube-scan-action@v8
         env:
