@@ -17,6 +17,9 @@ export default defineConfig({
         if (id.endsWith('/src/services/settingsManager.js')) {
           return { code: code + '\nexport { SettingsManager };', map: null };
         }
+        if (id.endsWith('/popup/popup.js')) {
+          return { code: code + '\nexport { loadSettings, saveInitialPrompt, DEFAULTS };', map: null };
+        }
         return null;
       },
     },
