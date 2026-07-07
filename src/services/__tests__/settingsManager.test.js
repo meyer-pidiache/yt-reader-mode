@@ -140,8 +140,8 @@ describe('SettingsManager', () => {
   });
 
   describe('init()', () => {
-    it('registers onChanged listener and calls load()', () => {
-      SettingsManager.init();
+    it('registers onChanged listener and calls load()', async () => {
+      await SettingsManager.init();
       
       expect(chrome.storage.onChanged.addListener).toHaveBeenCalled();
       // The listener should call load() when sync changes
@@ -149,8 +149,8 @@ describe('SettingsManager', () => {
       expect(listener).toBeDefined();
     });
 
-    it('loads settings on init', () => {
-      SettingsManager.init();
+    it('loads settings on init', async () => {
+      await SettingsManager.init();
       expect(chrome.storage.sync.get).toHaveBeenCalled();
     });
   });

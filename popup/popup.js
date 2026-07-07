@@ -12,27 +12,46 @@ const DEFAULTS = {
 };
 
 async function loadSettings() {
-  const items = await chrome.storage.sync.get(DEFAULTS);
-  autoActivateCheckbox.checked = items.autoActivate;
-  initialPromptEnabled.checked = items.initialPromptEnabled;
-  initialPromptText.value = items.initialPromptText || '';
+  try {
+    const items = await chrome.storage.sync.get(DEFAULTS);
+    autoActivateCheckbox.checked = items.autoActivate;
+    initialPromptEnabled.checked = items.initialPromptEnabled;
+    initialPromptText.value = items.initialPromptText || '';
+  } catch (error) {
+    console.error('Failed to load settings from storage, falling back to defaults', error);
+    autoActivateCheckbox.checked = DEFAULTS.autoActivate;
+    initialPromptEnabled.checked = DEFAULTS.initialPromptEnabled;
+    initialPromptText.value = DEFAULTS.initialPromptText;
+  }
 }
 
 async function saveInitialPrompt() {
-  await chrome.storage.sync.set({
-    initialPromptEnabled: initialPromptEnabled.checked,
-    initialPromptText: initialPromptText.value
-  });
+  try {
+    await chrome.storage.sync.set({
+      initialPromptEnabled: initialPromptEnabled.checked,
+      initialPromptText: initialPromptText.value
+    });
+  } catch (error) {
+    console.error('Failed to save prompt settings', error);
+  }
 }
 
 autoActivateCheckbox.addEventListener('change', async function () {
-  await chrome.storage.sync.set({ autoActivate: this.checked });
+  try {
+    await chrome.storage.sync.set({ autoActivate: this.checked });
+  } catch (error) {
+    console.error('Failed to save autoActivate setting', error);
+  }
 });
 
 initialPromptEnabled.addEventListener('change', saveInitialPrompt);
 
-initialPromptText.addEventListener('input', async function () {
-  await chrome.storage.sync.set({ initialPromptText: this.value });
+initialPromptText.addEventListener('change', async function () {
+  try {
+    await chrome.storage.sync.set({ initialPromptText: this.value });
+  } catch (error) {
+    console.error('Failed to save initial prompt text', error);
+  }
 });
 
 savePromptBtn.addEventListener('click', async function () {

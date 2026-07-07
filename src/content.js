@@ -1,1 +1,4 @@
-EventBus.emit('APP_INIT');
+(async () => {
+  await SettingsManager.init();
+  EventBus.emit('APP_INIT');
+})();
