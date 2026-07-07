@@ -9,45 +9,33 @@ const SettingsManager = {
     return { ...this._defaults };
   },
 
-  load() {
-    return new Promise((resolve) => {
-      try {
-        chrome.storage.sync.get((items) => {
-          let settings = this._defaults;
-          if (!chrome.runtime.lastError && items && typeof items === 'object') {
-            settings = { ...this._defaults, ...items };
-          }
-          StateManager.setSettings(settings);
-          resolve(settings);
-        });
-      } catch (e) {
-        StateManager.setSettings(this._defaults);
-        resolve(this._defaults);
-      }
-    });
+  async load() {
+    try {
+      const items = await chrome.storage.sync.get();
+      const settings = items && typeof items === 'object'
+        ? { ...this._defaults, ...items }
+        : { ...this._defaults };
+      StateManager.setSettings(settings);
+      return settings;
+    } catch {
+      StateManager.setSettings({ ...this._defaults });
+      return { ...this._defaults };
+    }
   },
 
-  save(partial) {
-    return new Promise((resolve) => {
-      try {
-        chrome.storage.sync.get((current) => {
-          const merged = { ...this._defaults, ...current, ...partial };
-          chrome.storage.sync.set(merged, resolve);
-        });
-      } catch (e) {
-        resolve();
-      }
-    });
+  async save(partial) {
+    try {
+      const current = await chrome.storage.sync.get();
+      const merged = { ...this._defaults, ...current, ...partial };
+      await chrome.storage.sync.set(merged);
+    } catch {}
   },
 
   init() {
     this.load();
-    chrome.storage.onChanged.addListener((changes, areaName) => {
+    chrome.storage.onChanged.addListener((_, areaName) => {
       if (areaName === 'sync') {
-        chrome.storage.sync.get((items) => {
-          const settings = { ...this._defaults, ...items };
-          StateManager.setSettings(settings);
-        });
+        this.load();
       }
     });
   }
