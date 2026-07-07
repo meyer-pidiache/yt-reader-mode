@@ -28,11 +28,13 @@ const SettingsManager = {
       const current = await chrome.storage.sync.get();
       const merged = { ...this._defaults, ...current, ...partial };
       await chrome.storage.sync.set(merged);
-    } catch {}
+    } catch (error) {
+      console.error('SettingsManager.save failed', error);
+    }
   },
 
-  init() {
-    this.load();
+  async init() {
+    await this.load();
     chrome.storage.onChanged.addListener((_, areaName) => {
       if (areaName === 'sync') {
         this.load();
@@ -40,5 +42,3 @@ const SettingsManager = {
     });
   }
 };
-
-EventBus.on('APP_INIT', () => SettingsManager.init());
