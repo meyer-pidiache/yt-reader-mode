@@ -39,7 +39,3 @@ Keep it focused — one PR should address one concern.
 - [ ] I have tested the change manually
 - [ ] I have updated documentation if needed
 - [ ] All existing tests pass
-
-## Migration guide (if breaking)
-
-<!-- Steps users need to take when upgrading -->
