@@ -18,7 +18,9 @@ const chromeMock = {
       const messages = {
         savedFeedback: 'Saved!',
         savePromptButton: 'Save Prompt',
-        defaultPrompt: 'Summarize the video'
+        defaultPrompt: 'Summarize the video',
+        toggleVideoLabel: 'Video',
+        toggleReaderLabel: 'Reader'
       };
       return messages[key] || key;
     })
@@ -218,6 +220,8 @@ describe('savePrompt button click', () => {
     await vi.waitFor(() => {
       expect(btn.textContent).toBe('Saved!');
     });
+
+    expect(chrome.i18n.getMessage).toHaveBeenCalledWith('savedFeedback');
   });
 
 });
