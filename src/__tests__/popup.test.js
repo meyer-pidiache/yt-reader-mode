@@ -20,7 +20,13 @@ const chromeMock = {
         savePromptButton: 'Save Prompt',
         defaultPrompt: 'Summarize the video',
         toggleVideoLabel: 'Video',
-        toggleReaderLabel: 'Reader'
+        toggleReaderLabel: 'Reader',
+        appName: 'YT Reader Mode',
+        autoActivateLabel: 'Auto-activate Reader Mode',
+        initialPromptTitle: 'Default Prompt',
+        sendAutomaticallyLabel: 'Send automatically',
+        initialPromptPlaceholder: 'Write a concise summary...',
+        footerDescription: 'Reader Mode helps you focus on content by providing a clean reading experience.'
       };
       return messages[key] || key;
     })
@@ -35,16 +41,32 @@ let DEFAULTS;
 
 beforeAll(async () => {
   document.body.innerHTML = `
+    <h1 data-i18n="appName">YT Reader Mode</h1>
+    <span class="toggle-label" data-i18n="autoActivateLabel">Auto-activate Reader Mode</span>
+    <span class="card-title" data-i18n="initialPromptTitle">Default Prompt</span>
+    <span class="toggle-label" data-i18n="sendAutomaticallyLabel">Send automatically</span>
+    <textarea id="initialPromptText" data-i18n="initialPromptPlaceholder" placeholder="Write a concise summary..."></textarea>
+    <button id="savePrompt" class="btn" data-i18n="savePromptButton">Save Prompt</button>
+    <div class="footer" data-i18n="footerDescription">Reader Mode helps you focus on content by providing a clean reading experience.</div>
     <input type="checkbox" id="autoActivate">
     <input type="checkbox" id="initialPromptEnabled">
-    <input type="text" id="initialPromptText">
-    <button id="savePrompt">Save Prompt</button>
   `;
 
   const popup = await import('../../popup/popup.js');
   loadSettings = popup.loadSettings;
   saveInitialPrompt = popup.saveInitialPrompt;
   DEFAULTS = popup.DEFAULTS;
+});
+
+describe('localizeUI()', () => {
+  it('localizes elements with data-i18n attributes', () => {
+    const h1 = document.querySelector('[data-i18n="appName"]');
+    expect(h1.textContent).toBe('YT Reader Mode');
+    const btn = document.querySelector('[data-i18n="savePromptButton"]');
+    expect(btn.textContent).toBe('Save Prompt');
+    const ta = document.querySelector('[data-i18n="initialPromptPlaceholder"]');
+    expect(ta.placeholder).toBe('Write a concise summary...');
+  });
 });
 
 describe('Popup DEFAULTS', () => {

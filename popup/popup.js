@@ -1,5 +1,23 @@
 'use strict';
 
+function localizeUI() {
+  const appName = chrome.i18n.getMessage('appName');
+  if (appName) {
+    document.title = appName;
+  }
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const msg = chrome.i18n.getMessage(key);
+    if (msg) {
+      if (el.hasAttribute('placeholder')) {
+        el.placeholder = msg;
+      } else {
+        el.textContent = msg;
+      }
+    }
+  });
+}
+
 const autoActivateCheckbox = document.getElementById('autoActivate');
 const initialPromptEnabled = document.getElementById('initialPromptEnabled');
 const initialPromptText = document.getElementById('initialPromptText');
@@ -62,4 +80,5 @@ savePromptBtn.addEventListener('click', async function () {
   }, 1500);
 });
 
+localizeUI();
 loadSettings();
