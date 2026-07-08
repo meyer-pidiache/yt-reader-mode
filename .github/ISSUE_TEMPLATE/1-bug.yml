@@ -1,0 +1,116 @@
+name: 🐞 Bug Report
+description: Report a bug to help us improve YT Reader Mode
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Before submitting, please confirm the following
+      options:
+        - label: I have searched existing issues to make sure this is not a duplicate
+          required: true
+        - label: I am using the latest version of the extension
+          required: true
+        - label: I have tested in a fresh tab (without other extensions interfering)
+          required: false
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Which browser(s) are you using?
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Brave
+        - Other (specify below)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: Installation method
+      options:
+        - Chrome Web Store
+        - Firefox AMO
+        - Load unpacked (development)
+    validations:
+      required: true
+
+  - type: input
+    id: extension-version
+    attributes:
+      label: Extension version
+      description: You can find this in the extension management page
+      placeholder: e.g. 0.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser version
+      placeholder: e.g. Firefox 128, Chrome 126
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: What happens and what did you expect?
+      placeholder: |
+        When I click the toggle button, the reader mode activates but...
+        I expected it to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Which YouTube page were you on? What steps did you take?
+      placeholder: |
+        1. Go to https://www.youtube.com/watch?v=...
+        2. Click the reader mode toggle
+        3. ...
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: console-errors
+    attributes:
+      label: Console errors
+      description: Open DevTools (F12) and paste any error messages from the Console tab
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / screen recordings
+      description: If applicable, add screenshots to help explain the problem
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other relevant info (OS, other extensions, etc.)
+    validations:
+      required: false

@@ -1,0 +1,68 @@
+name: ✨ Feature Request
+description: Suggest an idea for YT Reader Mode
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting! We welcome ideas that make this extension better.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      options:
+        - label: I have searched existing issues and discussions to make sure this is not a duplicate
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What pain point or limitation are you experiencing?
+      placeholder: |
+        When I use YT Reader Mode, I find it frustrating that...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should this work? Describe the ideal behavior
+      placeholder: |
+        I would like the extension to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example usage / expected behavior
+      description: Walk through a concrete example
+      placeholder: |
+        1. Go to a YouTube video with AI chat
+        2. The extension does X
+        3. User sees Y
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you considered any workarounds or alternative solutions?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: pr
+    attributes:
+      label: Would you like to submit a PR?
+      description: Help us implement this feature
+      options:
+        - "Yes"
+        - "No"
+        - Maybe / I need guidance
+    validations:
+      required: true
