@@ -39,16 +39,13 @@ describe('background.js', () => {
       vi.clearAllMocks();
     });
 
-    it('opens the welcome page and sets defaults on install', async () => {
+    it('opens the welcome page on install without overriding defaults', async () => {
       await onInstalledHandler({ reason: 'install' });
 
       expect(chrome.tabs.create).toHaveBeenCalledWith({
         url: 'chrome-extension://abc/welcome/welcome.html',
       });
-      expect(chrome.storage.sync.set).toHaveBeenCalledWith({
-        autoActivate: false,
-        initialPromptText: '',
-      });
+      expect(chrome.storage.sync.set).not.toHaveBeenCalled();
     });
   });
 

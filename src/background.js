@@ -8,11 +8,6 @@
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     chrome.tabs.create({ url: chrome.runtime.getURL('welcome/welcome.html') });
-
-    chrome.storage.sync.set({
-      autoActivate: false,
-      initialPromptText: '',
-    });
   }
 
   if (details.reason === 'update') {
