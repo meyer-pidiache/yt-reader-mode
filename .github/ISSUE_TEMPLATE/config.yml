@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/meyer-pidiache/yt-reader-mode/discussions
+    about: Ask questions, share ideas, or get help here
+  - name: 🔒 Security issue
+    url: https://github.com/meyer-pidiache/yt-reader-mode/security/advisories/new
+    about: Report security vulnerabilities privately
