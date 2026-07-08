@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>__MSG_appName__</title>
+  <title>YT Reader Mode</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 
@@ -12,14 +12,14 @@
   <div class="header">
     <img src="../icons/48.png" class="header-icon" alt="Icon">
     <div class="header-text">
-      <h1>__MSG_appName__</h1>
+      <h1 data-i18n="appName">YT Reader Mode</h1>
       <span>v0.1.0</span>
     </div>
   </div>
 
   <div class="section">
     <div class="toggle-row">
-      <span class="toggle-label">__MSG_autoActivateLabel__</span>
+      <span class="toggle-label" data-i18n="autoActivateLabel">Auto-activate Reader Mode</span>
       <label class="toggle-switch">
         <input type="checkbox" id="autoActivate">
         <span class="toggle-slider"></span>
@@ -30,23 +30,23 @@
   <div class="section">
     <div class="card">
       <div class="card-header">
-        <span class="card-title">__MSG_initialPromptTitle__</span>
+        <span class="card-title" data-i18n="initialPromptTitle">Default Prompt</span>
       </div>
       <div class="toggle-row" style="margin-bottom: 12px;">
-        <span class="toggle-label">__MSG_sendAutomaticallyLabel__</span>
+        <span class="toggle-label" data-i18n="sendAutomaticallyLabel">Send automatically</span>
         <label class="toggle-switch">
           <input type="checkbox" id="initialPromptEnabled">
           <span class="toggle-slider"></span>
         </label>
       </div>
       <textarea id="initialPromptText" class="textarea"
-        placeholder="__MSG_initialPromptPlaceholder__"></textarea>
-      <button id="savePrompt" class="btn">__MSG_savePromptButton__</button>
+        data-i18n="initialPromptPlaceholder" placeholder="Write a concise summary..."></textarea>
+      <button id="savePrompt" class="btn" data-i18n="savePromptButton">Save Prompt</button>
     </div>
   </div>
 
-  <div class="footer">
-    __MSG_footerDescription__
+  <div class="footer" data-i18n="footerDescription">
+    Reader Mode helps you focus on content by providing a clean reading experience.
   </div>
 
   <script src="popup.js"></script>
