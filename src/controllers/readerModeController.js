@@ -24,15 +24,14 @@ const ReaderModeController = {
   },
 
   _activateInternal() {
-    if (!PanelManager.triggerAskButton()) {
-      return;
-    }
+    if (YouTubeFacade.isShortsPage()) return;
+
+    if (!PanelManager.triggerAskButton()) return;
 
     if (PanelManager.isPanelLoaded()) {
       this._completeActivation();
       return;
     }
-
     this._clearWaiters();
 
     const targetNode = YouTubeFacade.getAppContainer();

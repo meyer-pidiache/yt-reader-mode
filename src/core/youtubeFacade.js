@@ -4,11 +4,15 @@ const YouTubeFacade = {
   },
 
   getPlayer() {
-    return document.getElementById('player');
+    const el = document.getElementById('player');
+    if (!el) console.log('[YT-Reader] YouTubeFacade.getPlayer(): NOT FOUND');
+    return el;
   },
 
   getEngagementPanel() {
-    return document.querySelector('ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"]');
+    const el = document.querySelector('ytd-engagement-panel-section-list-renderer[target-id="PAyouchat"]');
+    if (!el) console.log('[YT-Reader] YouTubeFacade.getEngagementPanel(): NOT FOUND');
+    return el;
   },
 
   getAskButton() {
@@ -16,7 +20,9 @@ const YouTubeFacade = {
   },
 
   getChatTextarea() {
-    return document.querySelector('yt-chat-input-view-model textarea.chatInputViewModelChatInput');
+    const el = document.querySelector('yt-chat-input-view-model textarea.chatInputViewModelChatInput');
+    if (!el) console.log('[YT-Reader] YouTubeFacade.getChatTextarea(): NOT FOUND');
+    return el;
   },
 
   getChatSendButton() {

@@ -14,6 +14,11 @@ const ToggleButton = {
   },
 
   inject() {
+    if (YouTubeFacade.isShortsPage()) {
+      this.remove();
+      return;
+    }
+
     this.remove();
 
     if (!this._icons) {
@@ -24,7 +29,10 @@ const ToggleButton = {
     }
 
     const container = document.querySelector('#actions #menu ytd-menu-renderer #flexible-item-buttons');
-    if (!container) return;
+    if (!container) {
+      console.log('[YT-Reader] ToggleButton.inject() aborted: container not found');
+      return;
+    }
 
     const template = container.querySelector('yt-button-view-model, button-view-model');
     let fromTemplate = false;
@@ -110,21 +118,36 @@ const ToggleButton = {
     }
 
     const targetNode = YouTubeFacade.getAppContainer();
+
     const check = () => {
       const askBtn = YouTubeFacade.getAskButton();
       if (askBtn && this._button) {
         this._button.style.display = '';
-        if (this._visibilityObserver) {
-          this._visibilityObserver.disconnect();
-          this._visibilityObserver = null;
-        }
+        this._stopObserving();
       }
+      return !!askBtn;
     };
 
-    check();
+    if (check()) return;
 
-    this._visibilityObserver = new MutationObserver(check);
+    let debounceTimer = null;
+    const onMutation = () => {
+      if (debounceTimer) return;
+      debounceTimer = setTimeout(() => {
+        debounceTimer = null;
+        if (check()) return;
+      }, 200);
+    };
+
+    this._visibilityObserver = new MutationObserver(onMutation);
     this._visibilityObserver.observe(targetNode, { childList: true, subtree: true });
+  },
+
+  _stopObserving() {
+    if (this._visibilityObserver) {
+      this._visibilityObserver.disconnect();
+      this._visibilityObserver = null;
+    }
   },
 
   remove() {

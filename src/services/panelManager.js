@@ -6,7 +6,8 @@ const PanelManager = {
   isPanelLoaded() {
     const panel = YouTubeFacade.getEngagementPanel();
     if (!panel) return false;
-    return YouTubeFacade.getChatTextarea() !== null;
+    const textarea = YouTubeFacade.getChatTextarea();
+    return textarea !== null;
   },
 
   triggerAskButton() {
