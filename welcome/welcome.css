@@ -1,0 +1,198 @@
+/* YT Reader Mode — Welcome / Onboarding Page Styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #0f0f11;
+  --color-surface: #1c1c1f;
+  --color-border: #2c2c30;
+  --color-text: #e8e8ed;
+  --color-text-secondary: #a1a1aa;
+  --color-accent: #8b5cf6;
+  --color-accent-hover: #7c3aed;
+  --color-accent-secondary: #27272a;
+  --color-accent-secondary-hover: #3f3f46;
+  --radius: 12px;
+  --max-width: 680px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.welcome {
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+/* Header */
+
+.welcome__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.welcome__icon {
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.2);
+}
+
+.welcome__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.welcome__subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+}
+
+/* Features grid */
+
+.welcome__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.feature {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.feature:hover {
+  border-color: var(--color-accent);
+}
+
+.feature__icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.feature__desc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Usage steps */
+
+.welcome__usage {
+  margin-bottom: 2.5rem;
+}
+
+.welcome__usage h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.welcome__steps {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.welcome__steps li {
+  font-size: 0.925rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.welcome__steps li strong {
+  color: var(--color-text);
+}
+
+/* Action buttons */
+
+.welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.welcome__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.welcome__btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.welcome__btn--primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.welcome__btn--secondary {
+  background: var(--color-accent-secondary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.welcome__btn--secondary:hover {
+  background: var(--color-accent-secondary-hover);
+}
+
+/* Footer */
+
+.welcome__footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.welcome__footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.welcome__footer a:hover {
+  text-decoration: underline;
+}
