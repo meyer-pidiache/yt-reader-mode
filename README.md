@@ -1,6 +1,32 @@
 # YT Reader Mode
 
+<p align="center">
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/yt-reader-mode/">
+    <img src="https://img.shields.io/amo/v/yt-reader-mode?style=for-the-badge&amp;logo=firefox&amp;color=FF7139" alt="Firefox AMO version">
+  </a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/yt-reader-mode/">
+    <img src="https://img.shields.io/amo/users/yt-reader-mode?style=for-the-badge&amp;logo=firefox&amp;color=FF7139" alt="Firefox AMO users">
+  </a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/yt-reader-mode/">
+    <img src="https://img.shields.io/amo/stars/yt-reader-mode?style=for-the-badge&amp;logo=firefox&amp;color=FF7139" alt="Firefox AMO rating">
+  </a>
+  <a href="https://chromewebstore.google.com/">
+    <img src="https://img.shields.io/badge/Chrome%20Web%20Store-Pending-lightgrey?style=for-the-badge&amp;logo=googlechrome" alt="Chrome Web Store">
+  </a>
+</p>
+
 A modern and lightweight browser extension designed to transform your YouTube experience. **YT Reader Mode** dynamically superimposes the native AI Chat panel ("Ask" / YouChat) over the video player, offering a focused and distraction-free reading environment.
+
+## Install
+
+Get YT Reader Mode from your browser's add-on store:
+
+| Store | Link |
+|---|---|
+| ![Firefox logo](https://img.shields.io/badge/-white?logo=firefox&style=social) **Firefox Add-ons (AMO)** | [yt-reader-mode](https://addons.mozilla.org/en-US/firefox/addon/yt-reader-mode/) |
+| ![Chrome logo](https://img.shields.io/badge/-white?logo=googlechrome&style=social) **Chrome Web Store** | Pending — coming soon |
+
+> For contributors and developers, see [Development Installation](#development-installation) below.
 
 ## Main Features
 
@@ -9,11 +35,11 @@ A modern and lightweight browser extension designed to transform your YouTube ex
 - **Initial Prompts:** Want a summary as soon as you open the video? Set up automatic text submissions for the AI to start your conversation immediately.
 - **Smart Timestamps:** Delegated integration where clicking on timestamps suggested by the model (e.g., `0:40`) automatically transitions the extension to video mode, allowing you to watch the referenced segment.
 
-## Prerequisites
+## Development Installation
+
+### Prerequisites
 
 - **Node.js >= 20** and **pnpm** (or npm)
-
-## Development Installation
 
 ### Chromium-based browsers (Chrome, Edge, Brave)
 
