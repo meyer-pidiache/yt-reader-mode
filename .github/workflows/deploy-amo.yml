@@ -29,4 +29,4 @@ jobs:
           --source-dir . \
           --channel listed \
           --approval-timeout 0 \
-          --ignore-files ".github/" ".atl/" "*.md" "sonar-project.properties"
+          --ignore-files ".github/" ".atl/" ".agents/" ".kiro/" "*.md" "skills-lock.json" "sonar-project.properties"
