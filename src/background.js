@@ -21,5 +21,3 @@ chrome.runtime.onInstalled.addListener((details) => {
     );
   }
 });
-
-export {};
