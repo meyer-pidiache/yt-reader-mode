@@ -25,6 +25,7 @@ beforeEach(() => {
     getAskButton: vi.fn(),
     getChatTextarea: vi.fn(),
     getChatSendButton: vi.fn(),
+    isShortsPage: vi.fn(() => false),
   };
 
   StateManager._state.isActive = false;
