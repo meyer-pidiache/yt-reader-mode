@@ -25,8 +25,8 @@ const chromeMock = {
         autoActivateLabel: 'Auto-activate Reader Mode',
         initialPromptTitle: 'Default Prompt',
         sendAutomaticallyLabel: 'Send automatically',
-        initialPromptPlaceholder: 'Write a concise summary...',
-        footerDescription: 'Reader Mode helps you focus on content by providing a clean reading experience.'
+        initialPromptPlaceholder: 'Enter a prompt to send automatically...',
+        footerDescription: 'Automatically replaces the video player with YouTube AI Chat'
       };
       return messages[key] || key;
     })
@@ -43,11 +43,11 @@ beforeAll(async () => {
   document.body.innerHTML = `
     <h1 data-i18n="appName">YT Reader Mode</h1>
     <span class="toggle-label" data-i18n="autoActivateLabel">Auto-activate Reader Mode</span>
-    <span class="card-title" data-i18n="initialPromptTitle">Default Prompt</span>
+    <span class="card-title" data-i18n="initialPromptTitle">Initial Prompt</span>
     <span class="toggle-label" data-i18n="sendAutomaticallyLabel">Send automatically</span>
-    <textarea id="initialPromptText" data-i18n="initialPromptPlaceholder" placeholder="Write a concise summary..."></textarea>
+    <textarea id="initialPromptText" data-i18n="initialPromptPlaceholder" placeholder="Enter a prompt to send automatically..."></textarea>
     <button id="savePrompt" class="btn" data-i18n="savePromptButton">Save Prompt</button>
-    <div class="footer" data-i18n="footerDescription">Reader Mode helps you focus on content by providing a clean reading experience.</div>
+    <div class="footer" data-i18n="footerDescription">Automatically replaces the video player with YouTube AI Chat</div>
     <input type="checkbox" id="autoActivate">
     <input type="checkbox" id="initialPromptEnabled">
   `;
@@ -65,7 +65,7 @@ describe('localizeUI()', () => {
     const btn = document.querySelector('[data-i18n="savePromptButton"]');
     expect(btn.textContent).toBe('Save Prompt');
     const ta = document.querySelector('[data-i18n="initialPromptPlaceholder"]');
-    expect(ta.placeholder).toBe('Write a concise summary...');
+    expect(ta.placeholder).toBe('Enter a prompt to send automatically...');
   });
 });
 
