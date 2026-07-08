@@ -16,7 +16,25 @@ jobs:
 
       - name: Build ZIP file
         run: |
-          zip -r yt-reader-mode.zip . -x "*.git*" -x ".github/*" -x "README.md" -x "CONTRIBUTING.md"
+          zip -r yt-reader-mode.zip . \
+            -x "*.git*" \
+            -x ".github/*" \
+            -x ".agents/**" \
+            -x ".kiro/**" \
+            -x "node_modules/**" \
+            -x "coverage/**" \
+            -x "web-ext-artifacts/**" \
+            -x "README.md" \
+            -x "CONTRIBUTING.md" \
+            -x "vitest.config.js" \
+            -x "src/test-setup.js" \
+            -x "src/**/__tests__/**" \
+            -x ".nvmrc" \
+            -x "pnpm-*" \
+            -x "package.json" \
+            -x ".web-ext-config.mjs" \
+            -x "sonar-project.properties" \
+            -x "skills-lock.json"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

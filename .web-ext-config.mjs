@@ -22,6 +22,9 @@ export default {
     'node_modules/**',
     'CONTRIBUTING.md',
     'sonar-project.properties',
+    '.agents/**',
+    '.kiro/**',
+    'skills-lock.json',
   ],
   // Build command defaults
   build: {
