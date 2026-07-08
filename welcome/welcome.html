@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to YT Reader Mode</title>
+  <link rel="stylesheet" href="welcome.css" />
+</head>
+<body>
+  <main class="welcome">
+    <header class="welcome__header">
+      <img
+        class="welcome__icon"
+        src="../icons/128.png"
+        alt="YT Reader Mode logo"
+        width="96"
+        height="96"
+      />
+      <h1 class="welcome__title">Welcome to YT Reader Mode!</h1>
+      <p class="welcome__subtitle">
+        Transform your YouTube experience — read instead of watch.
+      </p>
+    </header>
+
+    <section class="welcome__features">
+      <article class="feature">
+        <div class="feature__icon">📖</div>
+        <h2 class="feature__title">Immersive Reader Mode</h2>
+        <p class="feature__desc">
+          Toggle between the normal video and an expanded AI chat panel
+          synchronized with the player dimensions.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature__icon">⚡</div>
+        <h2 class="feature__title">Auto-activate</h2>
+        <p class="feature__desc">
+          Configure the extension to automatically enter Reader Mode on
+          videos that feature AI capabilities.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature__icon">💬</div>
+        <h2 class="feature__title">Initial Prompts</h2>
+        <p class="feature__desc">
+          Set automatic text submissions so the AI starts your conversation
+          immediately when you open a video.
+        </p>
+      </article>
+
+      <article class="feature">
+        <div class="feature__icon">⏱️</div>
+        <h2 class="feature__title">Smart Timestamps</h2>
+        <p class="feature__desc">
+          Click on AI-suggested timestamps and automatically switch to video
+          mode to watch the referenced segment.
+        </p>
+      </article>
+    </section>
+
+    <section class="welcome__usage">
+      <h2>How to use</h2>
+      <ol class="welcome__steps">
+        <li>
+          <strong>Go to YouTube</strong> — open any video with the AI chat
+          panel ("Ask" / YouChat).
+        </li>
+        <li>
+          <strong>Toggle Reader Mode</strong> — click the YT Reader Mode icon
+          in the toolbar, or the toggle button that appears on the page.
+        </li>
+        <li>
+          <strong>Customize</strong> — right-click the toolbar icon and select
+          "Options" to adjust auto-activate and prompt settings.
+        </li>
+      </ol>
+    </section>
+
+    <section class="welcome__actions">
+      <a
+        class="welcome__btn welcome__btn--primary"
+        href="https://www.youtube.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Try it on YouTube
+      </a>
+      <button class="welcome__btn welcome__btn--secondary" id="close-welcome">
+        Get started
+      </button>
+    </section>
+
+    <footer class="welcome__footer">
+      <p>
+        YT Reader Mode is an open-source project.
+        <a
+          href="https://github.com/meyer-pidiache/yt-reader-mode"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Contribute on GitHub
+        </a>
+      </p>
+    </footer>
+  </main>
+
+  <script src="welcome.js"></script>
+</body>
+</html>
