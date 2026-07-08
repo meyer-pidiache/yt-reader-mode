@@ -116,6 +116,10 @@ const ToggleButton = {
     if (this._visibilityObserver) {
       this._visibilityObserver.disconnect();
     }
+    if (this._debounceTimer) {
+      clearTimeout(this._debounceTimer);
+      this._debounceTimer = null;
+    }
 
     const targetNode = YouTubeFacade.getAppContainer();
 
@@ -130,11 +134,10 @@ const ToggleButton = {
 
     if (check()) return;
 
-    let debounceTimer = null;
     const onMutation = () => {
-      if (debounceTimer) return;
-      debounceTimer = setTimeout(() => {
-        debounceTimer = null;
+      if (this._debounceTimer) return;
+      this._debounceTimer = setTimeout(() => {
+        this._debounceTimer = null;
         if (check()) return;
       }, 200);
     };
@@ -144,6 +147,10 @@ const ToggleButton = {
   },
 
   _stopObserving() {
+    if (this._debounceTimer) {
+      clearTimeout(this._debounceTimer);
+      this._debounceTimer = null;
+    }
     if (this._visibilityObserver) {
       this._visibilityObserver.disconnect();
       this._visibilityObserver = null;
@@ -151,6 +158,10 @@ const ToggleButton = {
   },
 
   remove() {
+    if (this._debounceTimer) {
+      clearTimeout(this._debounceTimer);
+      this._debounceTimer = null;
+    }
     if (this._visibilityObserver) {
       this._visibilityObserver.disconnect();
       this._visibilityObserver = null;
