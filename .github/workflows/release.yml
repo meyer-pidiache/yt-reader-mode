@@ -73,8 +73,9 @@ jobs:
 
       - name: Submit to Firefox Add-ons
         if: steps.check-version.outputs.released == 'false'
-        run: npx --yes web-ext@8 sign \
-          --source-dir . \
-          --channel listed \
-          --approval-timeout 0 \
-          --ignore-files ".github/" ".atl/" ".agents/" ".kiro/" "*.md" "skills-lock.json" "sonar-project.properties"
+        run: |
+          npx --yes web-ext@8 sign \
+            --source-dir . \
+            --channel listed \
+            --approval-timeout 0 \
+            --ignore-files ".github/" ".atl/" ".agents/" ".kiro/" "*.md" "skills-lock.json" "sonar-project.properties"
