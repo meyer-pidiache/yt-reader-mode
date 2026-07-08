@@ -29,6 +29,10 @@ const YouTubeFacade = {
     return document.querySelector('yt-chat-input-view-model form button');
   },
 
+  isShortsPage() {
+    return window.location.pathname.startsWith('/shorts/');
+  },
+
   isTimestamp(element) {
     return element && element.classList && element.classList.contains('ytwMarkdownDivTimestamp');
   }
