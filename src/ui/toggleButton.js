@@ -150,10 +150,10 @@ const ToggleButton = {
 
     if (isActive) {
       icon.replaceChildren(this._icons.play);
-      label.textContent = 'Video';
+      label.textContent = chrome.i18n.getMessage('toggleVideoLabel');
     } else {
       icon.replaceChildren(this._icons.book);
-      label.textContent = 'Reader';
+      label.textContent = chrome.i18n.getMessage('toggleReaderLabel');
     }
   }
 };

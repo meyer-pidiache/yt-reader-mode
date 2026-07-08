@@ -8,7 +8,7 @@ const savePromptBtn = document.getElementById('savePrompt');
 const DEFAULTS = {
   autoActivate: true,
   initialPromptEnabled: true,
-  initialPromptText: 'Summarize the video'
+  initialPromptText: chrome.i18n.getMessage('defaultPrompt')
 };
 
 async function loadSettings() {
@@ -56,9 +56,9 @@ initialPromptText.addEventListener('change', async function () {
 
 savePromptBtn.addEventListener('click', async function () {
   await saveInitialPrompt();
-  savePromptBtn.textContent = 'Saved!';
+  savePromptBtn.textContent = chrome.i18n.getMessage('savedFeedback');
   setTimeout(() => {
-    savePromptBtn.textContent = 'Save Prompt';
+    savePromptBtn.textContent = chrome.i18n.getMessage('savePromptButton');
   }, 1500);
 });
 

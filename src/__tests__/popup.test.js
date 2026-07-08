@@ -12,6 +12,16 @@ const chromeMock = {
       get: vi.fn().mockResolvedValue(mockStorage),
       set: vi.fn().mockResolvedValue()
     }
+  },
+  i18n: {
+    getMessage: vi.fn((key) => {
+      const messages = {
+        savedFeedback: 'Saved!',
+        savePromptButton: 'Save Prompt',
+        defaultPrompt: 'Summarize the video'
+      };
+      return messages[key] || key;
+    })
   }
 };
 
