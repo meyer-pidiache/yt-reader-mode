@@ -77,5 +77,4 @@ jobs:
           npx --yes web-ext@8 sign \
             --source-dir . \
             --channel listed \
-            --approval-timeout 0 \
-            --ignore-files ".github/" ".atl/" ".agents/" ".kiro/" "*.md" "skills-lock.json" "sonar-project.properties"
+            --approval-timeout 0
