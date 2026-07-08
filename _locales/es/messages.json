@@ -1,0 +1,46 @@
+{
+  "appName": {
+    "message": "YT Reader Mode",
+    "description": "Nombre de la extensión en el título y encabezado del popup"
+  },
+  "autoActivateLabel": {
+    "message": "Activar modo lector automáticamente",
+    "description": "Etiqueta para el interruptor de activación automática"
+  },
+  "initialPromptTitle": {
+    "message": "Mensaje inicial",
+    "description": "Título de la sección de mensaje inicial"
+  },
+  "sendAutomaticallyLabel": {
+    "message": "Enviar automáticamente",
+    "description": "Etiqueta para el interruptor de envío automático"
+  },
+  "initialPromptPlaceholder": {
+    "message": "Ingresa un mensaje para enviar automáticamente...",
+    "description": "Texto de placeholder para el área de texto del mensaje inicial"
+  },
+  "savePromptButton": {
+    "message": "Guardar Mensaje",
+    "description": "Texto del botón para guardar el mensaje inicial"
+  },
+  "savedFeedback": {
+    "message": "¡Guardado!",
+    "description": "Notificación mostrada después de guardar el mensaje"
+  },
+  "footerDescription": {
+    "message": "Reemplaza automáticamente el reproductor de video con el chat de IA de YouTube",
+    "description": "Texto del pie que explica el propósito de la extensión"
+  },
+  "defaultPrompt": {
+    "message": "Resume el video",
+    "description": "Texto por defecto para el área de texto del mensaje inicial"
+  },
+  "toggleReaderLabel": {
+    "message": "Lector",
+    "description": "Etiqueta del botón de alternancia cuando está en modo Lector"
+  },
+  "toggleVideoLabel": {
+    "message": "Video",
+    "description": "Etiqueta del botón de alternancia cuando está en modo Video"
+  }
+}

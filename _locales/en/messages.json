@@ -1,0 +1,46 @@
+{
+  "appName": {
+    "message": "YT Reader Mode",
+    "description": "The extension name shown in the popup title and heading"
+  },
+  "autoActivateLabel": {
+    "message": "Auto-activate Reader Mode",
+    "description": "Label for the auto-activate toggle switch"
+  },
+  "initialPromptTitle": {
+    "message": "Initial Prompt",
+    "description": "Title for the initial prompt section"
+  },
+  "sendAutomaticallyLabel": {
+    "message": "Send automatically",
+    "description": "Label for the send automatically toggle"
+  },
+  "initialPromptPlaceholder": {
+    "message": "Enter a prompt to send automatically...",
+    "description": "Placeholder text for the initial prompt textarea"
+  },
+  "savePromptButton": {
+    "message": "Save Prompt",
+    "description": "Button text to save the initial prompt"
+  },
+  "savedFeedback": {
+    "message": "Saved!",
+    "description": "Feedback shown after saving the prompt"
+  },
+  "footerDescription": {
+    "message": "Automatically replaces the video player with YouTube AI Chat",
+    "description": "Footer text explaining the extension's purpose"
+  },
+  "defaultPrompt": {
+    "message": "Summarize the video",
+    "description": "Default text for the initial prompt textarea"
+  },
+  "toggleReaderLabel": {
+    "message": "Reader",
+    "description": "Label on the toggle button when in Reader mode"
+  },
+  "toggleVideoLabel": {
+    "message": "Video",
+    "description": "Label on the toggle button when in Video mode"
+  }
+}
