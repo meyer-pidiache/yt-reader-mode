@@ -2,19 +2,34 @@ name: Build and Release Extension
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      version: ${{ steps.check-version.outputs.version }}
+      released: ${{ steps.check-version.outputs.released }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Build ZIP file
+      - name: Read version and check tag
+        id: check-version
+        run: |
+          VERSION=$(jq -r '.version' manifest.json)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "released=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build ZIP
+        if: steps.check-version.outputs.released == 'false'
         run: |
           zip -r yt-reader-mode.zip . \
             -x "*.git*" \
@@ -37,14 +52,17 @@ jobs:
             -x "skills-lock.json"
 
       - name: Upload Artifact
+        if: steps.check-version.outputs.released == 'false'
         uses: actions/upload-artifact@v4
         with:
           name: yt-reader-mode-zip
           path: yt-reader-mode.zip
-          
+
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
+        if: steps.check-version.outputs.released == 'false'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v${{ steps.check-version.outputs.version }}
+          target_commitish: ${{ github.sha }}
           files: yt-reader-mode.zip
           generate_release_notes: true
