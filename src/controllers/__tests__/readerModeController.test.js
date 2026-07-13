@@ -3,6 +3,7 @@ import { ReaderModeController } from '../readerModeController.js';
 
 beforeEach(() => {
   EventBus._listeners = {};
+  ReaderModeController._initialPromptSent = false;
 
   globalThis.PanelManager = {
     triggerAskButton: vi.fn(),
@@ -210,5 +211,49 @@ describe('toggle()', () => {
 
     ReaderModeController.toggle();
     expect(StateManager.isActive).toBe(false);
+  });
+});
+
+describe('initial prompt', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    ReaderModeController._initialPromptSent = false;
+    PanelManager.triggerAskButton.mockReturnValue(true);
+    PanelManager.isPanelLoaded.mockReturnValue(true);
+    YouTubeFacade.getPlayer.mockReturnValue({ querySelector: vi.fn(() => ({ pause: vi.fn() })) });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('sends initial prompt only once across multiple activations', () => {
+    ReaderModeController.activate();
+    vi.advanceTimersByTime(500);
+    expect(PanelManager.sendMessage).toHaveBeenCalledTimes(1);
+
+    ReaderModeController.deactivate();
+    ReaderModeController.activateManual();
+    vi.advanceTimersByTime(500);
+    expect(PanelManager.sendMessage).toHaveBeenCalledTimes(1);
+  });
+
+  it('resets flag on APP_INIT so prompt sends again for new video', () => {
+    ReaderModeController.activate();
+    vi.advanceTimersByTime(500);
+    expect(PanelManager.sendMessage).toHaveBeenCalledTimes(1);
+
+    ReaderModeController.deactivate();
+    ReaderModeController._initialPromptSent = false;
+    ReaderModeController.activate();
+    vi.advanceTimersByTime(500);
+    expect(PanelManager.sendMessage).toHaveBeenCalledTimes(2);
+  });
+
+  it('does not send prompt when initialPromptEnabled is false', () => {
+    StateManager.setSettings({ initialPromptEnabled: false });
+    ReaderModeController.activate();
+    vi.advanceTimersByTime(500);
+    expect(PanelManager.sendMessage).not.toHaveBeenCalled();
   });
 });

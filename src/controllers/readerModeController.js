@@ -1,6 +1,7 @@
 const ReaderModeController = {
   _activationObserver: null,
   _activationTimeout: null,
+  _initialPromptSent: false,
 
   _clearWaiters() {
     if (this._activationObserver) {
@@ -89,7 +90,8 @@ const ReaderModeController = {
     PanelManager.startResizeObserver();
     PanelManager.startPanelObserver();
 
-    if (StateManager.settings.initialPromptEnabled && StateManager.settings.initialPromptText) {
+    if (!this._initialPromptSent && StateManager.settings.initialPromptEnabled && StateManager.settings.initialPromptText) {
+      this._initialPromptSent = true;
       setTimeout(() => {
         PanelManager.sendMessage(StateManager.settings.initialPromptText);
       }, 500);
@@ -119,7 +121,10 @@ const ReaderModeController = {
   }
 };
 
-EventBus.on('APP_INIT', () => ReaderModeController.activate());
+EventBus.on('APP_INIT', () => {
+  ReaderModeController._initialPromptSent = false;
+  ReaderModeController.activate();
+});
 EventBus.on('TOGGLE_REQUESTED', () => ReaderModeController.toggle());
 EventBus.on('PANEL_CLOSED_BY_USER', () => ReaderModeController.deactivate());
 EventBus.on('NAVIGATE_FINISH', () => {
