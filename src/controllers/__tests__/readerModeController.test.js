@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { ReaderModeController } from '../readerModeController.js';
+import { ReaderModeController, registerControllerListeners } from '../readerModeController.js';
 
 beforeEach(() => {
   EventBus._listeners = {};
+  registerControllerListeners();
   ReaderModeController._initialPromptSent = false;
 
   globalThis.PanelManager = {
@@ -244,10 +245,20 @@ describe('initial prompt', () => {
     expect(PanelManager.sendMessage).toHaveBeenCalledTimes(1);
 
     ReaderModeController.deactivate();
-    ReaderModeController._initialPromptSent = false;
-    ReaderModeController.activate();
+    EventBus.emit('APP_INIT');
     vi.advanceTimersByTime(500);
     expect(PanelManager.sendMessage).toHaveBeenCalledTimes(2);
+  });
+
+  it('does not send the previous video prompt after APP_INIT reset', () => {
+    ReaderModeController.activate();
+    expect(PanelManager.sendMessage).not.toHaveBeenCalled();
+
+    ReaderModeController.deactivate();
+    EventBus.emit('APP_INIT');
+    vi.advanceTimersByTime(500);
+    expect(PanelManager.sendMessage).toHaveBeenCalledTimes(1);
+    expect(PanelManager.sendMessage).toHaveBeenCalledWith('Summarize the video');
   });
 
   it('does not send prompt when initialPromptEnabled is false', () => {

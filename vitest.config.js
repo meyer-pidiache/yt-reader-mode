@@ -12,7 +12,7 @@ export default defineConfig({
           return { code: code + '\nexport { StateManager };', map: null };
         }
         if (id.endsWith('/src/controllers/readerModeController.js')) {
-          return { code: code + '\nexport { ReaderModeController };', map: null };
+          return { code: code + '\nexport { ReaderModeController, registerControllerListeners };', map: null };
         }
         if (id.endsWith('/src/services/settingsManager.js')) {
           return { code: code + '\nexport { SettingsManager };', map: null };

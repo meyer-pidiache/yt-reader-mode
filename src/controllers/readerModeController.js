@@ -1,6 +1,7 @@
 const ReaderModeController = {
   _activationObserver: null,
   _activationTimeout: null,
+  _initialPromptTimeout: null,
   _initialPromptSent: false,
 
   _clearWaiters() {
@@ -11,6 +12,14 @@ const ReaderModeController = {
     if (this._activationTimeout) {
       clearTimeout(this._activationTimeout);
       this._activationTimeout = null;
+    }
+    this._clearInitialPromptTimeout();
+  },
+
+  _clearInitialPromptTimeout() {
+    if (this._initialPromptTimeout) {
+      clearTimeout(this._initialPromptTimeout);
+      this._initialPromptTimeout = null;
     }
   },
 
@@ -92,7 +101,8 @@ const ReaderModeController = {
 
     if (!this._initialPromptSent && StateManager.settings.initialPromptEnabled && StateManager.settings.initialPromptText) {
       this._initialPromptSent = true;
-      setTimeout(() => {
+      this._clearInitialPromptTimeout();
+      this._initialPromptTimeout = setTimeout(() => {
         PanelManager.sendMessage(StateManager.settings.initialPromptText);
       }, 500);
     }
@@ -121,15 +131,20 @@ const ReaderModeController = {
   }
 };
 
-EventBus.on('APP_INIT', () => {
-  ReaderModeController._initialPromptSent = false;
-  ReaderModeController.activate();
-});
-EventBus.on('TOGGLE_REQUESTED', () => ReaderModeController.toggle());
-EventBus.on('PANEL_CLOSED_BY_USER', () => ReaderModeController.deactivate());
-EventBus.on('NAVIGATE_FINISH', () => {
-  ReaderModeController.deactivate();
-  setTimeout(() => {
-    EventBus.emit('APP_INIT');
-  }, 500);
-});
+function registerControllerListeners() {
+  EventBus.on('APP_INIT', () => {
+    ReaderModeController._clearInitialPromptTimeout();
+    ReaderModeController._initialPromptSent = false;
+    ReaderModeController.activate();
+  });
+  EventBus.on('TOGGLE_REQUESTED', () => ReaderModeController.toggle());
+  EventBus.on('PANEL_CLOSED_BY_USER', () => ReaderModeController.deactivate());
+  EventBus.on('NAVIGATE_FINISH', () => {
+    ReaderModeController.deactivate();
+    setTimeout(() => {
+      EventBus.emit('APP_INIT');
+    }, 500);
+  });
+}
+
+registerControllerListeners();
