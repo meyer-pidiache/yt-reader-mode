@@ -81,4 +81,8 @@ savePromptBtn.addEventListener('click', async function () {
 });
 
 localizeUI();
+const versionEl = document.getElementById('version');
+if (versionEl && chrome.runtime?.getManifest) {
+  versionEl.textContent = `v${chrome.runtime.getManifest().version}`;
+}
 loadSettings();
