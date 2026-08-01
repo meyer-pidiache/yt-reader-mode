@@ -30,6 +30,9 @@ const chromeMock = {
       };
       return messages[key] || key;
     })
+  },
+  runtime: {
+    getManifest: vi.fn(() => ({ version: '0.1.4' }))
   }
 };
 
@@ -42,6 +45,7 @@ let DEFAULTS;
 beforeAll(async () => {
   document.body.innerHTML = `
     <h1 data-i18n="appName">YT Reader Mode</h1>
+    <span id="version"></span>
     <span class="toggle-label" data-i18n="autoActivateLabel">Auto-activate Reader Mode</span>
     <span class="card-title" data-i18n="initialPromptTitle">Initial Prompt</span>
     <span class="toggle-label" data-i18n="sendAutomaticallyLabel">Send automatically</span>
@@ -66,6 +70,12 @@ describe('localizeUI()', () => {
     expect(btn.textContent).toBe('Save Prompt');
     const ta = document.querySelector('[data-i18n="initialPromptPlaceholder"]');
     expect(ta.placeholder).toBe('Enter a prompt to send automatically...');
+  });
+
+  it('displays the runtime extension version', () => {
+    const span = document.getElementById('version');
+    expect(span.textContent).toBe('v0.1.4');
+    expect(chrome.runtime.getManifest).toHaveBeenCalled();
   });
 });
 
